@@ -2,6 +2,7 @@ import Header from "@/app/components/Header";
 import Post from "@/app/components/Post";
 import { Posts } from "../../lib/interface";
 import { client } from "../../lib/sanity";
+import { Metadata } from "next";
 
 async function getPostsByTag(tag: string) {
   const query = `
@@ -36,6 +37,49 @@ export const revalidate = 30;
 
 interface TagsProp {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: TagsProp): Promise<Metadata> {
+  const { slug } = await params;
+
+  // Fetch post data based on slug
+  const post = await getPostsByTag(slug);
+
+  if (!post) {
+    return {
+      title: "Invalid Tag",
+    };
+  }
+
+  const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+
+  return {
+    title: `Posts tagged #${slug}`,
+    description: `Explore posts by ${slug} tag`,
+
+    openGraph: {
+      title: `Posts tagged #${slug}`,
+      description: `Explore posts by ${slug} tag`,
+      url: `https://bloggng.netlify.app/tag/${slug}`,
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+        },
+      ],
+      type: "article",
+      publishedTime: post.publishedAt,
+    },
+
+    twitter: {
+      title: `Posts tagged #${slug}`,
+      description: `Explore posts by ${slug} tag`,
+      images: [imageUrl],
+    },
+  };
 }
 
 export default async function page({ params }: TagsProp) {

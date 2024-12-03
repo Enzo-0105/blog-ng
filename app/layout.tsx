@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "Your hub for daily, up-to-date news and info!",
   openGraph: {
     type: "website",
-    url: "https://ng-blog-tau.vercel.app",
+    url: "https://bloggng.netlify.app",
     title: "BlogNG",
     description: "Your hub for daily, up-to-date news and info!",
   },

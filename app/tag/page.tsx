@@ -3,6 +3,7 @@ import React from "react";
 import { Tag } from "../lib/interface";
 import Header from "../components/Header";
 import Link from "next/link";
+import { Metadata } from "next";
 
 async function getAllTags() {
   const query = `
@@ -19,6 +20,22 @@ async function getAllTags() {
 }
 
 export const revalidate = 30;
+
+export const metadata: Metadata = {
+  title: "BlogNG • Tags",
+  description: "Get blogs by tags",
+  openGraph: {
+    type: "website",
+    url: "https://bloggng.netlify.app/tag",
+    title: "BlogNG • Tags",
+    description: "Your hub for daily, up-to-date news and info!",
+    images: [
+      {
+        url: "https://bloggng.netlify.app/blog_bg.png"
+      }
+    ]
+  },
+};
 
 const page = async () => {
   const tags: Tag[] = await getAllTags();
