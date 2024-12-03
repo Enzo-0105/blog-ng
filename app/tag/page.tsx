@@ -21,6 +21,8 @@ async function getAllTags() {
 
 export const revalidate = 30;
 
+const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+
 export const metadata: Metadata = {
   title: "BlogNG • Tags",
   description: "Get blogs by tags",
@@ -31,9 +33,11 @@ export const metadata: Metadata = {
     description: "Your hub for daily, up-to-date news and info!",
     images: [
       {
-        url: "https://bloggng.netlify.app/blog_bg.png"
-      }
-    ]
+        url: imageUrl,
+        width: 800,
+        height: 600,
+      },
+    ],
   },
 };
 

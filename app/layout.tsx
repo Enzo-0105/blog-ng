@@ -16,6 +16,8 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+
 export const metadata: Metadata = {
   title: "BlogNG",
   description: "Your hub for daily, up-to-date news and info!",
@@ -24,6 +26,13 @@ export const metadata: Metadata = {
     url: "https://bloggng.netlify.app",
     title: "BlogNG",
     description: "Your hub for daily, up-to-date news and info!",
+    images: [
+      {
+        url: imageUrl,
+        width: 800,
+        height: 600,
+      },
+    ],
   },
 };
 
