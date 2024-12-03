@@ -42,9 +42,9 @@ interface BlogProp {
 }
 
 // Dynamic metadata generation function
-export async function generateMetadata(
-  { params }: BlogProp,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: BlogProp): Promise<Metadata> {
   const { slug } = await params;
 
   // Fetch post data based on slug
@@ -59,11 +59,19 @@ export async function generateMetadata(
   return {
     title: post.title,
     description: post.excerpt,
+
     openGraph: {
       title: post.title,
       description: post.excerpt,
+      url: `https://bloggng.netlify.app/blog/${slug}`,
+      images: [],
       type: "article",
       publishedTime: post.publishedAt,
+    },
+
+    twitter: {
+      title: post.title,
+      description: post.excerpt,
     },
   };
 }
@@ -75,7 +83,7 @@ export default async function BlogPage({ params }: BlogProp) {
   if (!post) {
     notFound();
   }
-  
+
   return (
     <div>
       <Header title={post?.title} />
