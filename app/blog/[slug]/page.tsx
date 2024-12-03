@@ -6,6 +6,7 @@ import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 const dateFont = Nunito({ weight: "400", subsets: ["latin"] });
 
@@ -38,6 +39,33 @@ export const revalidate = 30;
 
 interface BlogProp {
   params: Promise<{ slug: string }>;
+}
+
+// Dynamic metadata generation function
+export async function generateMetadata(
+  { params }: BlogProp,
+): Promise<Metadata> {
+  const { slug } = params;
+
+  // Fetch post data based on slug
+  const post = await getPost(slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.publishedAt,
+    },
+  };
 }
 
 export default async function BlogPage({ params }: BlogProp) {
