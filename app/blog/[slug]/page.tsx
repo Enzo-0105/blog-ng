@@ -45,7 +45,7 @@ interface BlogProp {
 export async function generateMetadata(
   { params }: BlogProp,
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
 
   // Fetch post data based on slug
   const post = await getPost(slug);
