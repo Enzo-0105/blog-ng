@@ -56,6 +56,8 @@ export async function generateMetadata({
     };
   }
 
+  const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+
   return {
     title: post.title,
     description: post.excerpt,
@@ -64,7 +66,13 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       url: `https://bloggng.netlify.app/blog/${slug}`,
-      images: [],
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+        },
+      ],
       type: "article",
       publishedTime: post.publishedAt,
     },
@@ -72,6 +80,7 @@ export async function generateMetadata({
     twitter: {
       title: post.title,
       description: post.excerpt,
+      images: [imageUrl]
     },
   };
 }
