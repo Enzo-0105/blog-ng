@@ -9,6 +9,7 @@ async function getPosts() {
       title,
       excerpt,
       publishedAt,
+      postImage,
       slug,
       _id,
       tags[]-> {

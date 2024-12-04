@@ -1,33 +1,35 @@
 import React from "react";
-import { client, urlFor } from "../lib/sanity";
+import { urlFor } from "../lib/sanity";
 import Image from "next/image";
 import { avatar } from "../assets";
 
-async function getAuthorsInfo() {
-  const query = `
-    *[_type == 'author'] {
-      _id,
-      name,
-      avatar
-    }
-  `;
+// async function getAuthorsInfo() {
+//   const query = `
+//     *[_type == 'author'] {
+//       _id,
+//       name,
+//       avatar
+//     }
+//   `;
 
-  const data = await client.fetch(query);
-  return data;
-}
+//   const data = await client.fetch(query);
+//   return data;
+// }
 
 export const revalidate = 30;
 
-interface Author {
-  name: string;
-  image: any;
-  _id: string;
+interface AuthorProps {
+  authors: {
+    name: string;
+    image: any;
+    _id: string;
+  }[];
 }
 
 const fallbackAvatar = avatar;
 
-const Author = async () => {
-  const authors: Author[] = await getAuthorsInfo();
+const Author: React.FC<AuthorProps> = ({ authors }) => {
+  // const authors: Author[] = await getAuthorsInfo();
   // console.log(authors);
   return (
     <div>

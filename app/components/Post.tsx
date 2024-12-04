@@ -8,6 +8,7 @@ import { postBg } from "../assets";
 import { Button } from "@/components/ui/button";
 // import { urlFor } from "../lib/sanity";
 import Author from "./Author";
+import { urlFor } from "../lib/sanity";
 
 interface Props {
   post: Posts;
@@ -21,10 +22,10 @@ const Post = ({ post }: Props) => {
     <Card className="max-w-[350px] lg:max-w-[392px] w-full">
       <CardContent className="flex flex-col p-3 gap-[15px]">
         <Image
-          src={postBg}
+          src={post?.postImage ? urlFor(post?.postImage).url() : postBg}
           width={500}
           height={500}
-          className="object-contain rounded-md"
+          className="object-contain border rounded-md md:rounded-lg w-full md:h-[200px]"
           alt="blog_bg"
         />
         <h2 className={`${font.className} text-2xl line-clamp-2`}>
@@ -43,7 +44,7 @@ const Post = ({ post }: Props) => {
                 <h3>{author.name}</h3>
               </div>
             ))} */}
-            <Author />
+            <Author authors={post?.authors} /> {/* this is the author component */}
           </div>
           <p className={`${dateFont.className} text-sm`}>
             {new Date(post?.publishedAt).toDateString()}
