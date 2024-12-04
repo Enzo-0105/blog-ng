@@ -17,10 +17,6 @@ async function getPostsByTag(tag: string) {
         slug,
         name
       },
-      authors[]-> {
-        _id,
-        name
-      }
     }
   `;
 
@@ -53,7 +49,7 @@ export async function generateMetadata({
     };
   }
 
-  const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+  // const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
 
   return {
     title: `Posts tagged #${slug}`,
@@ -65,7 +61,7 @@ export async function generateMetadata({
       url: `https://bloggng.netlify.app/tag/${slug}`,
       images: [
         {
-          url: imageUrl,
+          url: "https://bloggng.netlify.app/blog_bg.png",
           width: 800,
           height: 600,
         },
@@ -77,7 +73,7 @@ export async function generateMetadata({
     twitter: {
       title: `Posts tagged #${slug}`,
       description: `Explore posts by ${slug} tag`,
-      images: [imageUrl],
+      images: ["https://bloggng.netlify.app/blog_bg.png"],
     },
   };
 }

@@ -26,7 +26,8 @@ async function getPost(slug: string) {
       },
       authors[]-> {
         _id,
-        name
+        name,
+        avatar
       }
     }
   `;
@@ -56,7 +57,7 @@ export async function generateMetadata({
     };
   }
 
-  const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+  // const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
 
   return {
     title: post.title,
@@ -68,7 +69,7 @@ export async function generateMetadata({
       url: `https://bloggng.netlify.app/blog/${slug}`,
       images: [
         {
-          url: imageUrl,
+          url: "https://bloggng.netlify.app/blog_ng.png",
           width: 800,
           height: 600,
         },
@@ -80,10 +81,11 @@ export async function generateMetadata({
     twitter: {
       title: post.title,
       description: post.excerpt,
-      images: [imageUrl]
+      images: ["https://bloggng.netlify.app/blog_bg.png"],
     },
   };
 }
+
 
 export default async function BlogPage({ params }: BlogProp) {
   const resolvedParams = await params;

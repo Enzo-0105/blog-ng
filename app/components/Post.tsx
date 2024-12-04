@@ -6,6 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import { postBg } from "../assets";
 import { Button } from "@/components/ui/button";
+// import { urlFor } from "../lib/sanity";
+import Author from "./Author";
 
 interface Props {
   post: Posts;
@@ -32,14 +34,16 @@ const Post = ({ post }: Props) => {
 
         <div className="flex justify-between items-center">
           <div>
-            {post?.authors?.map((author) => (
-              <span
+            {/* {post?.authors?.map((author) => (
+              <div
                 key={author._id}
                 className={`${font.className} font-semibold`}
               >
-                {author.name}
-              </span>
-            ))}
+                <Image src={urlFor(author.image).url()} alt="author_pfp" width={50} height={50} />
+                <h3>{author.name}</h3>
+              </div>
+            ))} */}
+            <Author />
           </div>
           <p className={`${dateFont.className} text-sm`}>
             {new Date(post?.publishedAt).toDateString()}

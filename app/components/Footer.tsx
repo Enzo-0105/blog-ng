@@ -5,20 +5,6 @@ const Footer = () => {
   return (
     <div className="mx-auto max-w-7xl px-5">
       <div className="mt-10 pt-5 border-primary border-t mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 text-base md:text-lg font-semibold">
-        <div>
-          <p>
-            &copy; 2024 | Made with 💛 by {""}
-            <a
-              href="https://www.tiktok.com/@codewithkang"
-              className="underline text-primary"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              amnesia2k
-            </a>
-          </p>
-        </div>
-
         <div className="flex gap-5">
           {footerLinks.map((link, idx) => (
             <a
@@ -31,6 +17,20 @@ const Footer = () => {
               {link.label}
             </a>
           ))}
+        </div>
+        
+        <div>
+          <p>
+            &copy; 2024 | Made with 💛 by {""}
+            <a
+              href="https://www.tiktok.com/@codewithkang"
+              className="underline text-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              amnesia2k
+            </a>
+          </p>
         </div>
       </div>
     </div>

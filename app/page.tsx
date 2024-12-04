@@ -18,7 +18,8 @@ async function getPosts() {
       },
       authors[]-> {
         _id,
-        name
+        name,
+        avatar
       },
     }
   `;
