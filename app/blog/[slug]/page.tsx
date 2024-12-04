@@ -7,6 +7,8 @@ import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import SharePost from "@/app/components/SharePost";
+import { IoShareSocial } from "react-icons/io5";
 
 const dateFont = Nunito({ weight: "400", subsets: ["latin"] });
 
@@ -16,6 +18,7 @@ async function getPost(slug: string) {
       title,
       excerpt,
       publishedAt,
+      postImage,
       slug,
       _id,
       body,
@@ -58,6 +61,7 @@ export async function generateMetadata({
   }
 
   // const imageUrl = "https://bloggng.netlify.app/blog_bg.png";
+  // const dynamicImageUrl = post[0]?.postImage?.asset.url || imageUrl
 
   return {
     title: post.title,
@@ -67,13 +71,13 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       url: `https://bloggng.netlify.app/blog/${slug}`,
-      images: [
-        {
-          url: "https://bloggng.netlify.app/blog_ng.png",
-          width: 800,
-          height: 600,
-        },
-      ],
+      // images: [
+      //   {
+      //     url: dynamicImageUrl,
+      //     width: 800,
+      //     height: 600,
+      //   },
+      // ],
       type: "article",
       publishedTime: post.publishedAt,
     },
@@ -81,11 +85,10 @@ export async function generateMetadata({
     twitter: {
       title: post.title,
       description: post.excerpt,
-      images: ["https://bloggng.netlify.app/blog_bg.png"],
+      // images: [dynamicImageUrl],
     },
   };
 }
-
 
 export default async function BlogPage({ params }: BlogProp) {
   const resolvedParams = await params;
@@ -99,12 +102,21 @@ export default async function BlogPage({ params }: BlogProp) {
     <div>
       <Header title={post?.title} />
 
-      <div className="text-center">
-        <span className={`${dateFont?.className}`}>
-          {new Date(post?.publishedAt).toDateString()}
-        </span>
+      <div>
+        <div className="max-w-[625px] w-full mx-auto mt-5">
+          <span className={`${dateFont?.className} text-md font-600`}>
+            {new Date(post?.publishedAt).toDateString()}
+          </span>
+        </div>
 
-        <div className="mt-5 flex justify-center items-center gap-3">
+        <div className="text-left mt-5 mx-auto prose md:prose-lg dark:prose-invert prose-li:marker:text-primary">
+          <PortableText
+            value={post?.body}
+            components={myPortableTextComponents}
+          />
+        </div>
+
+        <div className="max-w-[625px] w-full mx-auto mt-5 flex items-center gap-3">
           {post?.tags?.map((tag) => (
             <Link
               key={tag?._id}
@@ -116,11 +128,13 @@ export default async function BlogPage({ params }: BlogProp) {
           ))}
         </div>
 
-        <div className="text-left mt-5 mx-auto prose md:prose-lg dark:prose-invert prose-li:marker:text-primary">
-          <PortableText
-            value={post?.body}
-            components={myPortableTextComponents}
-          />
+        <div className="max-w-[625px] w-full mx-auto mt-5">
+          <div className="flex items-center gap-5">
+            <h3 className="text-xl font-bold flex gap-2 items-center">
+              Share Post <IoShareSocial fontWeight={500} />:
+            </h3>
+            <SharePost slug={post?.slug?.current} title={post?.title} />
+          </div>
         </div>
       </div>
     </div>

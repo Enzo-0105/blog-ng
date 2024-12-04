@@ -53,7 +53,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="mx-auto max-w-7xl px-5">{children}</main>
+          <main className="mx-auto mt-10 max-w-7xl px-5">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

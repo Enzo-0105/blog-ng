@@ -18,8 +18,8 @@ export function ModeToggle() {
   return (
     <>
       <Button
-        variant={"ghost"}
-        size={"icon"}
+        variant="ghost"
+        size="icon"
         className="rounded-full border border-primary hover:bg-green-500 hover:bg-opacity-20 hidden lg:flex"
         onClick={toggleTheme}
       >
