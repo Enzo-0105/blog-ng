@@ -1,0 +1,30 @@
+name:  Blog-ng
+
+on:
+  push:
+    branches:
+      - main
+      - DevOps
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    
+jobs:
+  Blog-ng:
+    runs-on: ubuntu-latest
+    name: Blog-ng
+    steps:
+      - name: Checking Code into Pipeline
+        uses: actions/checkout@v4
+
+      - name: SetUp Node Version
+        uses: actions/setup-node@v4.1.0
+        with:
+          node-version: 18
+
+      - name: Installing Dependencies
+        run: npm install 
+
+      - name: Check Linting 
+        run: npm run lint 
